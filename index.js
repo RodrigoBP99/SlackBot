@@ -65,10 +65,10 @@ function yoMommajoke() {
 
 // piada aleatoria
 function randomJoke() {
-  const rand = Math.floor(Math.random() * 2) + 1;
-  if (rand === 1) {
+  const rand = Math.floor(Math.random() * 2);
+  if (rand === 0) {
     chuckjoke();
-  } else if (rand === 2) {
+  } else if (rand === 1) {
     yoMommajoke();
   }
 }
