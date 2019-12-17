@@ -1,17 +1,14 @@
 const SlackBot = require("slackbots");
 const axios = require("axios");
+const config = require("./tokens.js");
 
 const bot = new SlackBot({
-  token: config.SLACK_API_TOKEN,
+  token: config.TOKEN,
   name: "jarvis"
 });
 
 //start handler
 bot.on("start", () => {
-  const params = {
-    icon_emoji: ":computer:"
-  };
-
   //bot.postMessageToChannel("froopy-land", "Olá, humanos!", params);
 });
 
@@ -28,40 +25,59 @@ bot.on("message", data => {
   handleMessage(data.text);
 });
 
+// trata mensagem
 function handleMessage(message) {
-  const params = {
-    icon_emoji: ":computer:"
-  };
-  if (message.includes("ola")) {
+  if (message.includes(" joke")) {
+    randomJoke();
+  } else if (message.includes(" ola")) {
     bot.postMessageToChannel(
       "froopy-land",
-      "Olá. Quer que eu te conte uma piada?",
-      params
+      "Olá. Quer que eu te conte uma piada?"
     );
-    return;
-  }
-
-  if (message.includes("joke" | "piada")) {
-    joke();
-    return;
-  }
-
-  if (message.includes("noob")) {
-    bot.postMessageToChannel("froopy-land", "Noob é você!", params);
-    return;
+  } else if (message.includes(" noob")) {
+    bot.postMessageToChannel("froopy-land", "Noob é você!");
+  } else if (message.includes("ajuda")) {
+    runHelp();
   }
 }
 
-joke;
-function joke() {
+//Chuck Norris joke;
+function chuckjoke() {
   axios.get("http://api.icndb.com/jokes/random").then(res => {
     const joke = res.data.value.joke;
 
-    console.log(res.data);
-    const params = {
-      icon_emoji: ":laughing:"
-    };
+    console.log(joke);
 
-    bot.postMessageToChannel("froopy-land", `Joke: ${joke}`, params);
+    bot.postMessageToChannel("froopy-land", `${joke}`);
   });
+}
+
+//Yo momma Joke
+function yoMommajoke() {
+  axios.get("https://api.yomomma.info/").then(res => {
+    const joke = res.data.joke;
+
+    console.log(joke);
+
+    bot.postMessageToChannel("froopy-land", `${joke}`);
+  });
+}
+
+// piada aleatoria
+function randomJoke() {
+  const rand = Math.floor(Math.random() * 2) + 1;
+  if (rand === 1) {
+    chuckjoke();
+  } else if (rand === 2) {
+    yoMommajoke();
+  }
+}
+
+//ajuda do bot
+function runHelp() {
+  console.log("ajuda");
+  bot.postMessageToChannel(
+    "froopy-land",
+    "Digite @jarvis 'joke', para eu te contar uma piada!"
+  );
 }
