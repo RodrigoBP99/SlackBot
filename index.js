@@ -1,15 +1,15 @@
 const SlackBot = require("slackbots");
 const axios = require("axios");
-const config = require("./tokens.js");
+const config = require("./config");
 
 const bot = new SlackBot({
-  token: config.TOKEN,
+  token: config("SLACK_TOKEN"),
   name: "jarvis"
 });
 
 //start handler
 bot.on("start", () => {
-  //bot.postMessageToChannel("froopy-land", "Olá, humanos!", params);
+  //bot.postMessageToChannel("froopy-land", "Olá, humanos!");
 });
 
 //erro
