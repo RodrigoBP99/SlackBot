@@ -4,7 +4,7 @@ const config = require("./config");
 
 const bot = new SlackBot({
   token: config("SLACK_TOKEN"),
-  name: "jarvis"
+  name: "J.A.R.V.I.S"
 });
 
 //start handler
@@ -20,6 +20,10 @@ bot.on("message", messageData => {
   if (messageData.type !== "message") {
     return;
   }
+
+  if (messageData.subtype === "bot_message") {
+    return;
+  }
   console.log(messageData);
 
   handleMessage(messageData);
@@ -27,7 +31,7 @@ bot.on("message", messageData => {
 
 // trata mensagem
 function handleMessage(messageData) {
-  if (messageData.text.includes(" joke")) {
+  if (messageData.text.includes("me conte uma piada")) {
     randomJoke(messageData);
   } else if (messageData.text.includes(" ola")) {
     bot.postMessage(
@@ -36,7 +40,7 @@ function handleMessage(messageData) {
     );
   } else if (messageData.text.includes(" noob")) {
     bot.postMessage(`${messageData.channel}`, "Noob é você!");
-  } else if (messageData.text.includes(" help")) {
+  } else if (messageData.text.includes(" ajuda")) {
     runHelp(messageData);
   } else if (messageData.text.includes("me inspire")) {
     inspireMe(messageData);
@@ -50,7 +54,7 @@ function chuckjoke(messageData) {
 
     console.log(joke);
 
-    bot.postMessageToChannel(`${messageData.channel}`, `${joke}`);
+    bot.postMessage(`${messageData.channel}`, `${joke}`);
   });
 }
 
@@ -80,7 +84,7 @@ function runHelp(messageData) {
   console.log("ajuda");
   bot.postMessage(
     `${messageData.channel}`,
-    "Digite @jarvis 'joke', para eu te contar uma piada.\nOu digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
+    "Digite @Jarvis 'me conte uma piada', para eu te contar uma piada.\nOu digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
   );
 }
 
