@@ -4,7 +4,7 @@
   "description": "SlackBot teste para workSpace",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "Rodrigo Boza Pontes",
   "license": "MIT",

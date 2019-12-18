@@ -13,71 +13,91 @@ bot.on("start", () => {
 });
 
 //erro
-bot.on("error", err => console.log(err));
+bot.on("error", err => console.log(`Erro: ${err}`));
 
 //mensagem
-bot.on("message", data => {
-  if (data.type !== "message") {
+bot.on("message", messageData => {
+  if (messageData.type !== "message") {
     return;
   }
-  console.log(data);
+  console.log(messageData);
 
-  handleMessage(data.text);
+  handleMessage(messageData);
 });
 
 // trata mensagem
-function handleMessage(message) {
-  if (message.includes(" joke")) {
-    randomJoke();
-  } else if (message.includes(" ola")) {
-    bot.postMessageToChannel(
-      "froopy-land",
+function handleMessage(messageData) {
+  if (messageData.text.includes(" joke")) {
+    randomJoke(messageData);
+  } else if (messageData.text.includes(" ola")) {
+    bot.postMessage(
+      `${messageData.channel}`,
       "Olá. Quer que eu te conte uma piada?"
     );
-  } else if (message.includes(" noob")) {
-    bot.postMessageToChannel("froopy-land", "Noob é você!");
-  } else if (message.includes("ajuda")) {
-    runHelp();
+  } else if (messageData.text.includes(" noob")) {
+    bot.postMessage(`${messageData.channel}`, "Noob é você!");
+  } else if (messageData.text.includes("ajuda")) {
+    runHelp(messageData);
+  } else if (messageData.text.includes("me inspire")) {
+    inspireMe(messageData);
   }
 }
 
 //Chuck Norris joke;
-function chuckjoke() {
+function chuckjoke(messageData) {
   axios.get("http://api.icndb.com/jokes/random").then(res => {
     const joke = res.data.value.joke;
 
     console.log(joke);
 
-    bot.postMessageToChannel("froopy-land", `${joke}`);
+    bot.postMessageToChannel(`${messageData.channel}`, `${joke}`);
   });
 }
 
 //Yo momma Joke
-function yoMommajoke() {
+function yoMommajoke(messageData) {
   axios.get("https://api.yomomma.info/").then(res => {
     const joke = res.data.joke;
 
     console.log(joke);
 
-    bot.postMessageToChannel("froopy-land", `${joke}`);
+    bot.postMessage(`${messageData.channel}`, `${joke}`);
   });
 }
 
 // piada aleatoria
-function randomJoke() {
+function randomJoke(messageData) {
   const rand = Math.floor(Math.random() * 2);
   if (rand === 0) {
-    chuckjoke();
+    chuckjoke(messageData);
   } else if (rand === 1) {
-    yoMommajoke();
+    yoMommajoke(messageData);
   }
 }
 
 //ajuda do bot
-function runHelp() {
+function runHelp(mensagemData) {
   console.log("ajuda");
-  bot.postMessageToChannel(
-    "froopy-land",
+  bot.postMessage(
+    `${mensagemData.channel}`,
     "Digite @jarvis 'joke', para eu te contar uma piada!"
   );
+}
+
+// me inspire
+function inspireMe(mensagemData) {
+  axios
+    .get(
+      "https://raw.githubusercontent.com/BolajiAyodeji/inspireNuggets/master/src/quotes.json"
+    )
+    .then(res => {
+      const quotes = res.data;
+      const random = Math.floor(Math.random() * quotes.length);
+      const quote = quotes[random].quote;
+      const author = quotes[random].author;
+
+      console.log(`${quote} - *${author}*`);
+
+      bot.postMessage(`${mensagemData.channel}`, `${quote} - *${author}*`);
+    });
 }
