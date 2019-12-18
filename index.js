@@ -36,7 +36,7 @@ function handleMessage(messageData) {
     );
   } else if (messageData.text.includes(" noob")) {
     bot.postMessage(`${messageData.channel}`, "Noob é você!");
-  } else if (messageData.text.includes("ajuda")) {
+  } else if (messageData.text.includes(" ajuda")) {
     runHelp(messageData);
   } else if (messageData.text.includes("me inspire")) {
     inspireMe(messageData);
@@ -76,16 +76,16 @@ function randomJoke(messageData) {
 }
 
 //ajuda do bot
-function runHelp(mensagemData) {
+function runHelp(messageData) {
   console.log("ajuda");
   bot.postMessage(
-    `${mensagemData.channel}`,
-    "Digite @jarvis 'joke', para eu te contar uma piada.\nOU digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
+    `${messageData.channel}`,
+    "Digite @jarvis 'joke', para eu te contar uma piada.\nOu digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
   );
 }
 
 // me inspire
-function inspireMe(mensagemData) {
+function inspireMe(messageData) {
   axios
     .get(
       "https://raw.githubusercontent.com/BolajiAyodeji/inspireNuggets/master/src/quotes.json"
@@ -98,6 +98,6 @@ function inspireMe(mensagemData) {
 
       console.log(`${quote} - *${author}*`);
 
-      bot.postMessage(`${mensagemData.channel}`, `${quote} - *${author}*`);
+      bot.postMessage(`${messageData.channel}`, `${quote} - *${author}*`);
     });
 }
