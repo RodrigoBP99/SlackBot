@@ -80,7 +80,7 @@ function runHelp(mensagemData) {
   console.log("ajuda");
   bot.postMessage(
     `${mensagemData.channel}`,
-    "Digite @jarvis 'joke', para eu te contar uma piada!"
+    "Digite @jarvis 'joke', para eu te contar uma piada.\nOU digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
   );
 }
 
