@@ -101,8 +101,3 @@ function inspireMe(messageData) {
       bot.postMessage(`${messageData.channel}`, `${quote} - *${author}*`);
     });
 }
-
-var http = require("http");
-setInterval(function() {
-  http.get("http://jarvis2lack8ot.herokuapp.com");
-}, 3000);
