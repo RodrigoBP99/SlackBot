@@ -36,7 +36,7 @@ function handleMessage(messageData) {
     );
   } else if (messageData.text.includes(" noob")) {
     bot.postMessage(`${messageData.channel}`, "Noob é você!");
-  } else if (messageData.text.includes(" ajuda")) {
+  } else if (messageData.text.includes(" help")) {
     runHelp(messageData);
   } else if (messageData.text.includes("me inspire")) {
     inspireMe(messageData);
@@ -101,3 +101,8 @@ function inspireMe(messageData) {
       bot.postMessage(`${messageData.channel}`, `${quote} - *${author}*`);
     });
 }
+
+var http = require("http");
+setInterval(function() {
+  http.get("http://jarvis2lack8ot.herokuapp.com");
+}, 3000);
