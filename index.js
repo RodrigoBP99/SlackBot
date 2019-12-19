@@ -3,8 +3,7 @@ const axios = require("axios");
 const config = require("./config");
 
 const bot = new SlackBot({
-  token: config("SLACK_TOKEN"),
-  name: "J.A.R.V.I.S"
+  token: config("SLACK_TOKEN")
 });
 
 //start handler
@@ -39,7 +38,7 @@ function handleMessage(messageData) {
   } else if (messageData.text.includes("<@URRRDJ0MB> ola")) {
     bot.postMessage(
       `${messageData.channel}`,
-      "Olá. Quer que eu te conte uma piada?"
+      "Olá. Quer que eu te conte uma piada? \nDigite '@J.A.R.V.I.S me conte uma piada'"
     );
   } else if (messageData.text.includes("<@URRRDJ0MB> noob")) {
     bot.postMessage(`${messageData.channel}`, "Noob é você!");
@@ -82,7 +81,7 @@ function randomJoke(messageData) {
 function runHelp(messageData) {
   bot.postMessage(
     `${messageData.channel}`,
-    "Digite @Jarvis 'me conte uma piada', para eu te contar uma piada.\nOu digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
+    "Digite '@J.A.R.V.I.S me conte uma piada', para eu te contar uma piada. \nOu digite '@J.A.R.V.I.S me inspire' para eu te falar uma frase motivacional!"
   );
 }
 
