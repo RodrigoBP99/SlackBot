@@ -17,12 +17,15 @@ bot.on("error", err => console.log(`Erro: ${err}`));
 
 //mensagem
 bot.on("message", messageData => {
-  if (messageData.type !== "message") {
+  if (
+    (messageData.type !== "message") |
+    (messageData.subtype === "bot_message")
+  ) {
     return;
   }
 
-  if (messageData.subtype === "bot_message") {
-    return;
+  if (messageData.subtype === "channel_join") {
+    bot.postMessage(`${messageData.channel}`, "Seja Bem Vindo!");
   }
   console.log(messageData);
 
