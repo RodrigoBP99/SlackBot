@@ -55,8 +55,6 @@ function chuckjoke(messageData) {
   axios.get("http://api.icndb.com/jokes/random").then(res => {
     const joke = res.data.value.joke;
 
-    console.log(joke);
-
     bot.postMessage(`${messageData.channel}`, `${joke}`);
   });
 }
@@ -65,8 +63,6 @@ function chuckjoke(messageData) {
 function yoMommajoke(messageData) {
   axios.get("https://api.yomomma.info/").then(res => {
     const joke = res.data.joke;
-
-    console.log(joke);
 
     bot.postMessage(`${messageData.channel}`, `${joke}`);
   });
@@ -84,7 +80,6 @@ function randomJoke(messageData) {
 
 //ajuda do bot
 function runHelp(messageData) {
-  console.log("ajuda");
   bot.postMessage(
     `${messageData.channel}`,
     "Digite @Jarvis 'me conte uma piada', para eu te contar uma piada.\nOu digite @jarvis 'me inspire' para eu te falar uma frase motivacional!"
@@ -102,8 +97,6 @@ function inspireMe(messageData) {
       const random = Math.floor(Math.random() * quotes.length);
       const quote = quotes[random].quote;
       const author = quotes[random].author;
-
-      console.log(`${quote} - *${author}*`);
 
       bot.postMessage(`${messageData.channel}`, `${quote} - *${author}*`);
     });
