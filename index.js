@@ -34,18 +34,18 @@ bot.on("message", messageData => {
 
 // trata mensagem
 function handleMessage(messageData) {
-  if (messageData.text.includes("me conte uma piada")) {
+  if (messageData.text.includes("<@URRRDJ0MB> me conte uma piada")) {
     randomJoke(messageData);
-  } else if (messageData.text.includes(" ola")) {
+  } else if (messageData.text.includes("<@URRRDJ0MB> ola")) {
     bot.postMessage(
       `${messageData.channel}`,
       "Olá. Quer que eu te conte uma piada?"
     );
-  } else if (messageData.text.includes(" noob")) {
+  } else if (messageData.text.includes("<@URRRDJ0MB> noob")) {
     bot.postMessage(`${messageData.channel}`, "Noob é você!");
-  } else if (messageData.text.includes(" ajuda")) {
+  } else if (messageData.text.includes("<@URRRDJ0MB> ajuda")) {
     runHelp(messageData);
-  } else if (messageData.text.includes("me inspire")) {
+  } else if (messageData.text.includes("<@URRRDJ0MB> me inspire")) {
     inspireMe(messageData);
   }
 }
