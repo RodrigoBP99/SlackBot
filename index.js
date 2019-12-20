@@ -38,11 +38,11 @@ function handleMessage(messageData) {
   } else if (messageData.text.includes("<@URRRDJ0MB> ola")) {
     bot.postMessage(
       `${messageData.channel}`,
-      "Olá. Quer que eu te conte uma piada? \nDigite '@J.A.R.V.I.S me conte uma piada'"
+      "Olá. Oque você deseja, humano? \nDigite '@J.A.R.V.I.S comandos' para saber meus comandos!"
     );
   } else if (messageData.text.includes("<@URRRDJ0MB> noob")) {
     bot.postMessage(`${messageData.channel}`, "Noob é você!");
-  } else if (messageData.text.includes("<@URRRDJ0MB> ajuda")) {
+  } else if (messageData.text.includes("<@URRRDJ0MB> comandos")) {
     runHelp(messageData);
   } else if (messageData.text.includes("<@URRRDJ0MB> me inspire")) {
     inspireMe(messageData);
