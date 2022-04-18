@@ -9,7 +9,7 @@
   "author": "Rodrigo Boza Pontes",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.2",
     "nodemon": "^2.0.2",
     "slackbots": "^1.2.0",
     "xmlhttprequest": "^1.8.0"
